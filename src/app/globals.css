@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/*
+  Design tokens follow the higglo.io system: deep navy hero, white and mist
+  sections, Instrument Sans display type with tight tracking, Inter body copy,
+  20px card radius, 10px buttons and a three-stop gradient accent. The gradient
+  starts in Jalur Gemilang red instead of magenta to suit the Malaysia Section.
+*/
+@theme {
+  --color-navy: #05243a;
+  --color-navy-2: #0b3352;
+  --color-ink: #3d5468;
+  --color-muted: #566a7d;
+  --color-line: #c3ced9;
+  --color-hair: #e3e9ef;
+  --color-mist: #f1f4f7;
+  --color-violet: #8d65fd;
+  --color-sky: #3aaffe;
+  --color-crimson: #f0263f;
+
+  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --brand-gradient: linear-gradient(90deg, #f0263f 0%, #8d65fd 52%, #3aaffe 100%);
+  --brand-solid: linear-gradient(90deg, #c8102e 0%, #6a45e6 50%, #1c6fc2 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #8d65fd33;
+}
+
+@utility bg-brand-gradient {
+  background-image: var(--brand-gradient);
+}
+
+@utility bg-brand-solid {
+  background-image: var(--brand-solid);
+}
+
+@utility text-brand-gradient {
+  background-image: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gradient underline used for inline text links. */
+@utility link-gradient {
+  background-image: var(--brand-gradient);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 2px;
+  padding-bottom: 3px;
+  transition: background-size 0.25s ease;
+  &:hover {
+    background-size: 100% 3px;
+  }
+}
+
+/* Faint concentric rings on the navy hero. */
+@utility hero-rings {
+  background-color: var(--color-navy);
+  background-image:
+    repeating-radial-gradient(circle at 78% 30%, transparent 0 139px, rgb(255 255 255 / 0.055) 140px 141px),
+    radial-gradient(60% 70% at 85% 0%, rgb(141 101 253 / 0.16), transparent 70%);
+}
+
+@utility h-display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.022em;
+  line-height: 0.98;
+}
+
+@utility h-section {
+  font-family: var(--font-display);
+  font-weight: 600;
+  color: var(--color-navy);
+  letter-spacing: -0.022em;
+  line-height: 1.02;
+  font-size: clamp(2.1rem, 1.4rem + 2.4vw, 2.7rem);
+}
+
+@utility card {
+  border-radius: 20px;
+  background: var(--color-mist);
+}
+
+/* Native <details> accordion: hide the default marker. */
+summary::-webkit-details-marker {
+  display: none;
+}
+summary {
+  list-style: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
